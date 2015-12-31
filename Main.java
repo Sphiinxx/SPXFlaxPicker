@@ -5,29 +5,35 @@ import org.tribot.api.General;
 import org.tribot.api.Timing;
 import org.tribot.api.input.Mouse;
 import org.tribot.api2007.*;
+import org.tribot.api2007.Constants;
 import org.tribot.api2007.types.RSArea;
 import org.tribot.api2007.types.RSObject;
 import org.tribot.api2007.types.RSTile;
 import org.tribot.script.Script;
 import org.tribot.script.ScriptManifest;
 import org.tribot.script.interfaces.MessageListening07;
+import org.tribot.script.interfaces.MousePainting;
+import org.tribot.script.interfaces.MouseSplinePainting;
 import org.tribot.script.interfaces.Painting;
+import scripts.SPXAIOPlanker.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 /**
  * Created by Sphiinx on 9/3/2015.
  */
 @SuppressWarnings("ALL")
-@ScriptManifest(authors = "Sphiinx", category = "Money making", name = "SPX FlaxPicker", description = "Created by Sphiinx\nOne of TRiBots Fastest Flax Picker. Start it wherever you want.\n\n\n-FEATURES-\n850+ Flax/Hour\nSexy Paint\nCustom Paths\nWebWalking\nDynamic Clicking\nIntelligent Banking\n\n\n-Supported Locations-\nSeers Village\nMore coming soon\n\n\n-Coming Soon-\nFlax Picking/Spinning then Banking")
-public class Main extends Script implements Painting, MessageListening07 {
+@ScriptManifest(authors = "Sphiinx", category = "Money making", name = "[SPX] FlaxPicker", version = 1.3)
+public class Main extends Script implements Painting, MessageListening07, MousePainting, MouseSplinePainting{
 
     private int FLAX_COUNT = 0;
+    private double version;
     private final long startTime = System.currentTimeMillis();
     private final Color color1 = new Color(0, 169, 194);
     private final Color color2 = new Color(255, 255, 255);
@@ -75,6 +81,7 @@ public class Main extends Script implements Painting, MessageListening07 {
     // Start of the script run
     @Override
     public void run() {
+        version = getClass().getAnnotation(ScriptManifest.class).version();
         Mouse.setSpeed(RANDOM_MOUSE);
         General.useAntiBanCompliance(true);
         // Start of the script loop
@@ -186,20 +193,46 @@ public class Main extends Script implements Painting, MessageListening07 {
         if (Login.getLoginState() == Login.STATE.INGAME) {
             long timeRan = System.currentTimeMillis() - startTime;
 
-            g.drawImage(img1, 2, 200, null);
-            g.setFont(font1);
-            g.setColor(color1);
-            g.drawString("- Flax Picker", 68, 226);
-            g.setFont(font2);
-            g.setColor(color2);
-            g.drawString("Runtime: " + Timing.msToString(timeRan), 11, 252);
-            g.drawString("Flax: " + FLAX_COUNT, 11, 272);
-            g.drawString("Status: " + STATUS, 11, 292);
+            g.setColor(scripts.SPXAIOPlanker.Constants.BLACK_COLOR);
+            g.fillRoundRect(11, 220, 200, 110, 8, 8); // Paint background
+            g.setColor(scripts.SPXAIOPlanker.Constants.RED_COLOR);
+            g.drawRoundRect(9, 218, 202, 112, 8, 8); // Red outline
+            g.fillRoundRect(13, 223, 194, 22, 8, 8); // Title background
+            g.setFont(scripts.SPXAIOPlanker.Constants.TITLE_FONT);
+            g.setColor(Color.WHITE);
+            g.drawString("[SPX] AIO Planker", 18, 239);
+            g.setFont(scripts.SPXAIOPlanker.Constants.TEXT_FONT);
+            g.drawString("Runtime: " + Timing.msToString(timeRan), 14, 260);
+            g.drawString("Flax: " + FLAX_COUNT, 14, 276);
+            g.drawString("Status: " + STATUS, 14, 293);
+            g.drawString("v" + version, 185, 326);
         }
     }
     // PAINT END
     // PAINT END
     // PAINT END
+
+    @Override
+    public void paintMouse(Graphics g, Point point, Point point1) {
+        g.setColor(scripts.SPXAIOPlanker.Constants.BLACK_COLOR);
+        g.drawRect(Mouse.getPos().x - 13, Mouse.getPos().y - 13, 27, 27); // Square rectangle Stroke
+        g.drawRect(Mouse.getPos().x, Mouse.getPos().y - 512, 1, 500); // Top y axis Line Stroke
+        g.drawRect(Mouse.getPos().x, Mouse.getPos().y + 13, 1, 500); // Bottom y axis Line Stroke
+        g.drawRect(Mouse.getPos().x + 13, Mouse.getPos().y, 800, 1); // Right x axis line Stroke
+        g.drawRect(Mouse.getPos().x - 812, Mouse.getPos().y, 800, 1); // left x axis line Stroke
+        g.fillOval(Mouse.getPos().x - 3, Mouse.getPos().y - 3, 7, 7); // Center dot stroke
+        g.setColor(scripts.SPXAIOPlanker.Constants.RED_COLOR);
+        g.drawRect(Mouse.getPos().x - 12, Mouse.getPos().y - 12, 25, 25); // Square rectangle
+        g.drawRect(Mouse.getPos().x, Mouse.getPos().y - 512, 0, 500); // Top y axis Line
+        g.drawRect(Mouse.getPos().x, Mouse.getPos().y + 13, 0, 500); // Bottom y axis Line
+        g.drawRect(Mouse.getPos().x + 13, Mouse.getPos().y, 800, 0); // Right x axis line
+        g.drawRect(Mouse.getPos().x - 812, Mouse.getPos().y, 800, 0); // left x axis line
+        g.fillOval(Mouse.getPos().x - 2, Mouse.getPos().y - 2, 5, 5); // Center dot
+    }
+
+    @Override
+    public void paintMouseSpline(Graphics graphics, ArrayList<Point> arrayList) {
+    }
 
 
 }
