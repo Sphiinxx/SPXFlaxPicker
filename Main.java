@@ -35,12 +35,12 @@ public class Main extends Script implements Painting, MessageListening07, MouseP
     private int FLAX_COUNT = 0;
     private double version;
     private final long startTime = System.currentTimeMillis();
-    private final Color color1 = new Color(0, 169, 194);
-    private final Color color2 = new Color(255, 255, 255);
-    private final Font font1 = new Font("Segoe Script", 0, 20);
-    private final Font font2 = new Font("Arial", 0, 15);
-    private final Image img1 = getImage("http://i.imgur.com/fRrLAWr.png");
-    private final RenderingHints antialiasing = new RenderingHints(
+    public final long START_TIME = System.currentTimeMillis();
+    public final Color RED_COLOR = new Color(214, 39, 39, 240);
+    public final Color BLACK_COLOR = new Color(0, 0, 0, 100);
+    public final Font TITLE_FONT = new Font("Arial Bold", 0, 15);
+    public final Font TEXT_FONT = new Font("Arial", 0, 12);
+    public final RenderingHints ANTIALIASING = new RenderingHints(
             RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     private final int RANDOM_MOUSE = General.random(100, 120);
     private final int RANDOM_ANGLE = General.random(65, 100);
@@ -188,20 +188,20 @@ public class Main extends Script implements Painting, MessageListening07, MouseP
 
     public void onPaint(Graphics g1) {
         Graphics2D g = (Graphics2D)g1;
-        g.setRenderingHints(antialiasing);
+        g.setRenderingHints(ANTIALIASING);
 
         if (Login.getLoginState() == Login.STATE.INGAME) {
             long timeRan = System.currentTimeMillis() - startTime;
 
-            g.setColor(scripts.SPXAIOPlanker.Constants.BLACK_COLOR);
+            g.setColor(BLACK_COLOR);
             g.fillRoundRect(11, 220, 200, 110, 8, 8); // Paint background
-            g.setColor(scripts.SPXAIOPlanker.Constants.RED_COLOR);
+            g.setColor(RED_COLOR);
             g.drawRoundRect(9, 218, 202, 112, 8, 8); // Red outline
             g.fillRoundRect(13, 223, 194, 22, 8, 8); // Title background
-            g.setFont(scripts.SPXAIOPlanker.Constants.TITLE_FONT);
+            g.setFont(TITLE_FONT);
             g.setColor(Color.WHITE);
-            g.drawString("[SPX] AIO Planker", 18, 239);
-            g.setFont(scripts.SPXAIOPlanker.Constants.TEXT_FONT);
+            g.drawString("[SPX] Flax Picker", 18, 239);
+            g.setFont(TEXT_FONT);
             g.drawString("Runtime: " + Timing.msToString(timeRan), 14, 260);
             g.drawString("Flax: " + FLAX_COUNT, 14, 276);
             g.drawString("Status: " + STATUS, 14, 293);
@@ -214,14 +214,14 @@ public class Main extends Script implements Painting, MessageListening07, MouseP
 
     @Override
     public void paintMouse(Graphics g, Point point, Point point1) {
-        g.setColor(scripts.SPXAIOPlanker.Constants.BLACK_COLOR);
+        g.setColor(BLACK_COLOR);
         g.drawRect(Mouse.getPos().x - 13, Mouse.getPos().y - 13, 27, 27); // Square rectangle Stroke
         g.drawRect(Mouse.getPos().x, Mouse.getPos().y - 512, 1, 500); // Top y axis Line Stroke
         g.drawRect(Mouse.getPos().x, Mouse.getPos().y + 13, 1, 500); // Bottom y axis Line Stroke
         g.drawRect(Mouse.getPos().x + 13, Mouse.getPos().y, 800, 1); // Right x axis line Stroke
         g.drawRect(Mouse.getPos().x - 812, Mouse.getPos().y, 800, 1); // left x axis line Stroke
         g.fillOval(Mouse.getPos().x - 3, Mouse.getPos().y - 3, 7, 7); // Center dot stroke
-        g.setColor(scripts.SPXAIOPlanker.Constants.RED_COLOR);
+        g.setColor(RED_COLOR);
         g.drawRect(Mouse.getPos().x - 12, Mouse.getPos().y - 12, 25, 25); // Square rectangle
         g.drawRect(Mouse.getPos().x, Mouse.getPos().y - 512, 0, 500); // Top y axis Line
         g.drawRect(Mouse.getPos().x, Mouse.getPos().y + 13, 0, 500); // Bottom y axis Line
