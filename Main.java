@@ -5,24 +5,22 @@ import org.tribot.api.General;
 import org.tribot.api.Timing;
 import org.tribot.api.input.Mouse;
 import org.tribot.api2007.*;
-import org.tribot.api2007.Constants;
 import org.tribot.api2007.types.RSArea;
 import org.tribot.api2007.types.RSObject;
 import org.tribot.api2007.types.RSTile;
 import org.tribot.script.Script;
 import org.tribot.script.ScriptManifest;
-import org.tribot.script.interfaces.MessageListening07;
-import org.tribot.script.interfaces.MousePainting;
-import org.tribot.script.interfaces.MouseSplinePainting;
-import org.tribot.script.interfaces.Painting;
-import scripts.SPXAIOPlanker.*;
+import org.tribot.script.interfaces.*;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Base64;
 
 
 /**
@@ -30,9 +28,10 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("ALL")
 @ScriptManifest(authors = "Sphiinx", category = "Money making", name = "[SPX] FlaxPicker", version = 1.3)
-public class Main extends Script implements Painting, MessageListening07, MousePainting, MouseSplinePainting{
+public class Main extends Script implements Painting, MessageListening07, MousePainting, MouseSplinePainting, Ending{
 
     private int FLAX_COUNT = 0;
+    long timeRan;
     private double version;
     private final long startTime = System.currentTimeMillis();
     public final long START_TIME = System.currentTimeMillis();
@@ -143,7 +142,6 @@ public class Main extends Script implements Painting, MessageListening07, MouseP
                     sleep(400, 500);
                 } else if (nearestFlax != null && !nearestFlax.isOnScreen()) {
                     Walking.walkTo(nearestFlax.getPosition());
-                    println("No Flax on screen, we're now walking to some.");
                     nearestFlax.getModel().click();
                 }
             }
@@ -191,7 +189,7 @@ public class Main extends Script implements Painting, MessageListening07, MouseP
         g.setRenderingHints(ANTIALIASING);
 
         if (Login.getLoginState() == Login.STATE.INGAME) {
-            long timeRan = System.currentTimeMillis() - startTime;
+            timeRan = System.currentTimeMillis() - startTime;
 
             g.setColor(BLACK_COLOR);
             g.fillRoundRect(11, 220, 200, 110, 8, 8); // Paint background
@@ -234,6 +232,33 @@ public class Main extends Script implements Painting, MessageListening07, MouseP
     public void paintMouseSpline(Graphics graphics, ArrayList<Point> arrayList) {
     }
 
+    public static boolean sendSignatureData(long runtimeInSeconds, int flaxCount) {
+        String privateKey = "C5A1B33F62AC2D81";
+        String initVector = "E6135CCC2FE8BE8C";
+        try {
+            String data = initVector + "," + General.getTRiBotUsername() + "," + runtimeInSeconds + "," + flaxCount;
+            String token = Base64.getEncoder().encodeToString(data.getBytes());
+
+            URL url = new URL("http://www.spxscripts.com/spxflaxpicker/input.php?token="+token);
+            URLConnection conn = url.openConnection();
+
+            conn.setRequestProperty("User-Agent","Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13 (.NET CLR 3.5.30729)");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            in.readLine();
+            in.close();
+            return true;
+
+        } catch (Exception e) {
+            General.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public void onEnd() {
+        sendSignatureData(timeRan / 1000, FLAX_COUNT);
+    }
 
 }
 // End of the script.
