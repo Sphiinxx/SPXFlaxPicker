@@ -1,4 +1,4 @@
-package scripts.SPXFlax;
+package scripts.SPXFlaxPicker;
 
 import org.tribot.api.DynamicClicking;
 import org.tribot.api.General;
