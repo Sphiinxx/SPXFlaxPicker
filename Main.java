@@ -192,7 +192,7 @@ public class Main extends Script implements Painting, MessageListening07, MouseP
             timeRan = System.currentTimeMillis() - startTime;
 
             g.setColor(BLACK_COLOR);
-            g.fillRoundRect(11, 220, 200, 110, 8, 8); // Paint background
+            g.fillRoundRect(11, 220, 200, 110, 8, 8); // SPXMouse07 background
             g.setColor(RED_COLOR);
             g.drawRoundRect(9, 218, 202, 112, 8, 8); // Red outline
             g.fillRoundRect(13, 223, 194, 22, 8, 8); // Title background
