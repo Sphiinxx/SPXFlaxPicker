@@ -1,4 +1,4 @@
-package scripts.SPXFlaxPicker;
+package scripts.spxflaxpicker;
 
 import org.tribot.api.General;
 

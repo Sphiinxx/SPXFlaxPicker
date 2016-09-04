@@ -1,17 +1,15 @@
-package scripts.SPXFlaxPicker.tasks;
+package scripts.spxflaxpicker.tasks;
 
 import org.tribot.api.Clicking;
 import org.tribot.api.General;
-import org.tribot.api.types.generic.Condition;
 import org.tribot.api2007.Inventory;
 import org.tribot.api2007.Player;
-import org.tribot.api2007.WebWalking;
 import org.tribot.api2007.types.RSItem;
 import org.tribot.api2007.types.RSObject;
-import scripts.TaskFramework.framework.Task;
-import scripts.TribotAPI.game.objects.Objects07;
-import scripts.TribotAPI.game.timing.Timing07;
-import scripts.TribotAPI.game.walking.Walking07;
+import scripts.task_framework.framework.Task;
+import scripts.tribotapi.game.objects.Objects07;
+import scripts.tribotapi.game.timing.Timing07;
+import scripts.tribotapi.game.walking.Walking07;
 
 /**
  * Created by Sphiinx on 7/11/2016.

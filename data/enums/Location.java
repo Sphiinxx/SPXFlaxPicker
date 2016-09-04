@@ -1,4 +1,4 @@
-package scripts.SPXFlaxPicker.data.enums;
+package scripts.spxflaxpicker.data.enums;
 
 import org.tribot.api2007.types.RSTile;
 

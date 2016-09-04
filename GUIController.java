@@ -1,4 +1,4 @@
-package scripts.SPXFlaxPicker;
+package scripts.spxflaxpicker;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,14 +10,14 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import org.tribot.api.Timing;
-import scripts.SPXCowKiller.*;
-import scripts.SPXCowKiller.data.Vars;
-import scripts.SPXCowKiller.data.enums.Location;
-import scripts.TribotAPI.Client;
-import scripts.TribotAPI.SendReportData;
-import scripts.TribotAPI.gui.AbstractGUIController;
-import scripts.TribotAPI.util.Utility;
+import scripts.tribotapi.Client;
+import scripts.tribotapi.PostRequest;
+import scripts.tribotapi.gui.AbstractGUIController;
+import scripts.tribotapi.util.Utility;
 
+/**
+ * Created by Sphiinx on 7/28/2016.
+ */
 @DoNotRename
 public class GUIController extends AbstractGUIController {
 
@@ -89,13 +89,13 @@ public class GUIController extends AbstractGUIController {
         website_link.setOnAction((event -> Utility.openURL("http://spxscripts.com/")));
 
         send_report.setOnAction((event) -> {
-            if (SendReportData.LAST_SENT_TIME <= 0 || Timing.timeFromMark(SendReportData.LAST_SENT_TIME) > 60000) {
-                if (!SendReportData.sendReportData(Client.getManifest(Main.class).name(), Client.getManifest(Main.class).version(), bug_description.getText(), bug_stacktrace.getText(), bug_clientdebug.getText(), bug_botdebug.getText()))
+            if (PostRequest.LAST_SENT_TIME <= 0 || Timing.timeFromMark(PostRequest.LAST_SENT_TIME) > 60000) {
+                if (!PostRequest.sendReportData(Client.getManifest(Main.class).name(), Client.getManifest(Main.class).version(), bug_description.getText(), bug_stacktrace.getText(), bug_clientdebug.getText(), bug_botdebug.getText()))
                     report_sent.setText("UH OH! There seems to have been an error with your report!");
 
                 report_sent.setOpacity(1);
                 report_spam.setOpacity(0);
-                SendReportData.LAST_SENT_TIME = Timing.currentTimeMillis();
+                PostRequest.LAST_SENT_TIME = Timing.currentTimeMillis();
             } else {
                 report_sent.setOpacity(0);
                 report_spam.setOpacity(1);

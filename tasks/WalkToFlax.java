@@ -1,13 +1,13 @@
-package scripts.SPXFlaxPicker.tasks;
+package scripts.spxflaxpicker.tasks;
 
 import org.tribot.api.General;
 import org.tribot.api.types.generic.Condition;
 import org.tribot.api2007.Inventory;
 import org.tribot.api2007.WebWalking;
 import org.tribot.api2007.types.RSObject;
-import scripts.SPXFlaxPicker.data.enums.Location;
-import scripts.TaskFramework.framework.Task;
-import scripts.TribotAPI.game.objects.Objects07;
+import scripts.spxflaxpicker.data.enums.Location;
+import scripts.task_framework.framework.Task;
+import scripts.tribotapi.game.objects.Objects07;
 
 /**
  * Created by Sphiinx on 7/11/2016.

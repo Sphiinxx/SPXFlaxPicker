@@ -1,4 +1,4 @@
-package scripts.SPXFlaxPicker.data;
+package scripts.spxflaxpicker.data;
 
 /**
  * Created by Sphiinx on 7/11/2016.
