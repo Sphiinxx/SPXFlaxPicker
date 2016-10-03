@@ -10,8 +10,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import org.tribot.api.Timing;
+import scripts.generalapi.PostRequest;
 import scripts.tribotapi.Client;
-import scripts.tribotapi.PostRequest;
 import scripts.tribotapi.gui.AbstractGUIController;
 import scripts.tribotapi.util.Utility;
 
