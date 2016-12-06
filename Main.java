@@ -22,9 +22,9 @@ import java.net.URL;
  * Created by Sphiinx on 9/3/2015.
  * Re-written by Sphiinx on 7/28/2016.
  */
-@ScriptManifest(authors = "Sphiinx", category = "Money making", name = "[SPX] FlaxPicker", version = 1.5)
+@ScriptManifest(authors = "Sphiinx", category = "Money making", name = "[SPX] Flax Picker", version = 1.5)
 @DoNotRename
-public class Main extends AbstractScript implements Painting, MessageListening07, EventBlockingOverride, Ending {
+public class Main extends AbstractScript implements Painting, MousePainting, MouseSplinePainting, MessageListening07, EventBlockingOverride, Ending {
 
     @Override
     protected GUI getGUI() {
